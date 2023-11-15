@@ -9,9 +9,7 @@
         state: present
     - name: Add NodeSource repositories for Node.js.
       apt_repository:
-        repo: "{{ item }}"
-      with_items:
-        - "deb https://deb.nodesource.com/node_20.x {{ ansible_distribution_release }} main"
+        repo: "deb https://deb.nodesource.com/node_20.x {{ ansible_distribution_release }} main"
     - name: Install nodejs
       apt:
         name: nodejs
