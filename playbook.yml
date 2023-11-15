@@ -1,0 +1,11 @@
+---
+- name: Run a shell command
+  hosts: all
+  tasks:
+    - name: Install node
+      # raw: echo "Hello, Ansible!"
+      # shell: echo "Hello, Ansible!"
+      ansible.builtin.apt:
+        name: nodejs
+        update_cache: yes
+      
