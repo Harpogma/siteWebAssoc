@@ -2,16 +2,6 @@
 - name: Run a shell command
   hosts: all
   tasks:
-    # ====== Required packages ======
-    - name: Install required system packages
-      apt:
-        pkg:
-          - python3-pip
-          - python3-setuptools
-        state: latest
-        update_cache: true
-        
-    # ====== Node and webserver ======
     - name: Add Nodesource apt key.
       apt_key:
         url: https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
@@ -30,7 +20,7 @@
         global: yes
     - name: install serve systemd unit file
       template: 
-        src: serveJS.service
+        src: ../serveJS.service
         dest: /etc/systemd/system/serveJS.service
     - name: start serveJS
       systemd: 
@@ -38,23 +28,4 @@
         name: serveJS
         daemon_reload: yes
 
-    # ====== Docker ======
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
-        state: present
-
-    - name: Update apt and install docker-ce
-      apt:
-        name: docker-ce
-        state: latest
-        update_cache: true
-
-    - name: Install Docker Module for Python
-      pip:
-        name: docker
+  
