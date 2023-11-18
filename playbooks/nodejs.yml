@@ -14,18 +14,19 @@
       apt:
         name: nodejs
         update_cache: yes
-    - name: Install "serve" node.js package      
-      npm:
-        name: serve
-        global: yes
-    - name: install serve systemd unit file
-      template: 
-        src: ../serveJS.service
-        dest: /etc/systemd/system/serveJS.service
-    - name: start serveJS
-      systemd: 
-        state: started
-        name: serveJS
-        daemon_reload: yes
+
+    # - name: Install "serve" node.js package      
+    #   npm:
+    #     name: serve
+    #     global: yes
+    # - name: install serve systemd unit file
+    #   template: 
+    #     src: ../serveJS.service
+    #     dest: /etc/systemd/system/serveJS.service
+    # - name: start serveJS
+    #   systemd: 
+    #     state: started
+    #     name: serveJS
+    #     daemon_reload: yes
 
   

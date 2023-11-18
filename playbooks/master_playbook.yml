@@ -4,3 +4,6 @@
 
   - name: Run docker
     import_playbook: docker.yml
+
+  - name: Run WordPress
+    import_playbook: wordpress.yml

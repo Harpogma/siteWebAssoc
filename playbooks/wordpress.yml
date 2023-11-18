@@ -1,0 +1,37 @@
+---
+- name: Deploy MySQL Container
+  hosts: all
+  become: true
+  tasks:
+    - name: Pull MySQL image
+      docker_image:
+        name: mysql:5.7
+        source: pull
+    - name: Run MySQL container
+      docker_container:
+        name: mysql-container
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: examplepass
+          MYSQL_DATABASE: exampledb
+          MYSQL_USER: exampleuser
+          MYSQL_PASSWORD: examplepass
+        ports:
+          - "3306:3306"
+    - name: Pull WordPress image
+      docker_image:
+        name: wordpress:latest
+        source: pull
+    - name: Run WordPress container
+      docker_container:
+        name: wordpress-container
+        image: wordpress:latest
+        links:
+          - "mysql-container:mysql"
+        ports:
+          - "8080:80"
+        env:
+          WORDPRESS_DB_HOST: mysql
+          WORDPRESS_DB_USER: exampleuser
+          WORDPRESS_DB_PASSWORD: examplepass
+          WORDPRESS_DB_NAME: exampledb
