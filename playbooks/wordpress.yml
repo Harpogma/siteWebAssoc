@@ -24,6 +24,8 @@
           MYSQL_PASSWORD: "{{ mysql[2] }}"
         volumes:
           - mysql_data:/var/lib/mysql
+        networks:
+          - name: siteweb_asso
 
     - name: Pull WordPress image
       docker_image:
@@ -36,10 +38,10 @@
         image: wordpress:latest
         links:
           - "mysql-container:mysql"
-        ports:
-          - "80:80"
         env:
           WORDPRESS_DB_HOST: mysql
           WORDPRESS_DB_USER: "{{ mysql[1] }}"
           WORDPRESS_DB_PASSWORD: "{{ mysql[2] }}"
           WORDPRESS_DB_NAME: "{{ mysql[0] }}"
+        networks:
+          - name: siteweb_asso
