@@ -2,5 +2,8 @@
   - name: Run requirements.yml
     import_playbook: requirements.yml
 
+  - name: Run Secure_connection
+    import_playbook: secure_connection.yml
+  
   - name: Run WordPress
     import_playbook: wordpress.yml

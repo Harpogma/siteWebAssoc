@@ -1,0 +1,39 @@
+---
+- name: Set up Traefik with Docker for secure connections
+  hosts: all
+  tasks:
+    - name: Create a network for all containers
+      docker_network:
+        name: siteweb_asso
+
+    - name: Traefik static config file
+      ansible.builtin.template:
+        dest: /srv/siteweb_asso/traefik/
+        src: traefik.yml
+
+    - name: Set up Traefik
+      docker_container:
+        name: traefik_container
+        image: traefik:latest
+        state: started
+        restart: true
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          #- /var/run/docker.sock:/var/run/docker.sock
+          - /srv/siteweb_asso/traefik/:/etc/traefik/
+        networks:
+          - name: siteweb_asso
+
+      - name: Pull Whoami Docker image
+        docker_image:
+          name: "traefik/whoami"
+          source: pull
+
+      - name: Run Whoami Docker container
+        docker_container:
+          name: "whoami_container"
+          image: "traefik/whoami"
+          networks:
+            - name: siteweb_asso
