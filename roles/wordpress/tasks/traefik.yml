@@ -9,7 +9,7 @@
     - name: Traefik static config file
       ansible.builtin.template:
         dest: /srv/siteweb_asso/traefik/
-        src: "../traefik/traefik.yml"
+        src: "../../traefik/traefik.yml"
 
     - name: Set up Traefik
       docker_container:
@@ -25,3 +25,4 @@
           - /srv/siteweb_asso/traefik/:/etc/traefik/
         networks:
           - name: siteweb_asso
+        
