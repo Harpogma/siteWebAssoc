@@ -3,7 +3,7 @@
     import_playbook: requirements.yml
 
   - name: Run Secure_connection
-    import_playbook: secure_connection.yml
+    import_playbook: traefik.yml
   
   - name: Run WordPress
     import_playbook: wordpress.yml
