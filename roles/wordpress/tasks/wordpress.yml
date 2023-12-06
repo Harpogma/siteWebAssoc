@@ -45,3 +45,5 @@
           WORDPRESS_DB_NAME: "{{ mysql[0] }}"
         networks:
           - name: siteweb_asso
+        labels: 
+          traefik.enable: "true"

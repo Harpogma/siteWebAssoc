@@ -6,6 +6,8 @@ providers:
   file:
     directory: /etc/traefik/config
     watch: true
+  docker: 
+    exposedByDefault: false
 
 log:
   level: INFO
