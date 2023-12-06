@@ -14,7 +14,7 @@
 
     - name: Run MySQL container
       docker_container:
-        name: mysql-container
+        name: mysql
         image: mysql:5.7
         restart: true
         env:
@@ -34,7 +34,7 @@
 
     - name: Run WordPress container
       docker_container:
-        name: wordpress-container
+        name: wordpress
         image: wordpress:latest
         links:
           - "mysql-container:mysql"
@@ -45,5 +45,3 @@
           WORDPRESS_DB_NAME: "{{ mysql[0] }}"
         networks:
           - name: siteweb_asso
-        labels: 
-          traefik.enable: "true"

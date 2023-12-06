@@ -1,0 +1,13 @@
+---
+http:
+  services:
+    wordpress:
+      loadBalancer:
+        servers: 
+          - url: "http://wordpress"
+  
+  routers:
+    wordpress:
+      rule: Host(`monasso-86-119-30-14.nip.io`)
+      service: wordpress
+      tls: {}
