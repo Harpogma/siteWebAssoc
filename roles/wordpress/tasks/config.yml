@@ -6,14 +6,25 @@
       docker_network:
         name: siteweb_asso
 
+    - name: Create directory for config file
+      file: 
+        path: /srv/siteweb_asso/traefik/config/
+        state: directory
+        mode: '0755'
+
     - name: Traefik static config file
       ansible.builtin.template:
         dest: /srv/siteweb_asso/traefik/
         src: "../../traefik/traefik.yml"
 
+    - name: Traefik dynamic config file
+      ansible.builtin.template:
+        dest: /srv/siteweb_asso/traefik/config/dynamic.yml
+        src: "../templates/traefik.yml"
+
     - name: Set up Traefik
       docker_container:
-        name: traefik_container
+        name: traefik
         image: traefik:latest
         state: started
         restart: true
@@ -21,7 +32,6 @@
           - "80:8080"
           - "443:443"
         volumes:
-          - /var/run/docker.sock:/var/run/docker.sock
           - /srv/siteweb_asso/traefik/:/etc/traefik/
         networks:
           - name: siteweb_asso
