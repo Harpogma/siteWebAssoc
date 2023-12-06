@@ -1,6 +1,6 @@
 api:
-  insecure: false
   dashboard: true
+  insecure: true
 
 providers:
   file:
@@ -8,7 +8,7 @@ providers:
     watch: true
 
 log:
-  level: DEBUG
+  level: INFO
 
 entryPoints:
   http:
