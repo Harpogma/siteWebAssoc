@@ -5,9 +5,25 @@ http:
       loadBalancer:
         servers: 
           - url: "http://wordpress"
+
+    api:
+      loadBalancer:
+        servers:
+          - url: "http://api"
   
   routers:
     wordpress:
-      rule: Host(`monasso-86-119-30-14.nip.io`)
+      rule: Host(`wordpress.monasso-86-119-30-14.nip.io`)
       service: wordpress
       tls: {}
+
+    api: 
+      rule: Host(`api.monasso-86-119-30-14.nip.io`)
+      service: api@internal
+
+  # middleware: 
+  #   dashboard-auth: 
+  #     basicAuth: 
+  #       users: "test:""
+
+        
