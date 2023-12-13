@@ -12,18 +12,16 @@ http:
           - url: "http://api"
   
   routers:
-    wordpress:
-      rule: Host(`wordpress.monasso-86-119-30-14.nip.io`)
-      service: wordpress
-      tls: {}
-
-    api: 
-      rule: Host(`api.monasso-86-119-30-14.nip.io`)
+    # wordpress:
+    #   rule: Host(`monasso-86-119-30-14.nip.io`)
+    #   service: wordpress
+    #   tls: {}
+    api:
+      rule: Host(`monasso-86-119-30-14.nip.io`)
       service: api@internal
+      middlewares: api
 
-  # middleware: 
-  #   dashboard-auth: 
-  #     basicAuth: 
-  #       users: "test:""
-
-        
+  middlewares:
+    api:
+      basicAuth:
+        users: "test:8050e815c81feca96f920629787b3165"
