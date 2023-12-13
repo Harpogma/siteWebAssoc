@@ -5,23 +5,32 @@ http:
       loadBalancer:
         servers: 
           - url: "http://wordpress"
-
-    api:
-      loadBalancer:
-        servers:
-          - url: "http://api"
   
   routers:
-    # wordpress:
-    #   rule: Host(`monasso-86-119-30-14.nip.io`)
-    #   service: wordpress
-    #   tls: {}
-    api:
-      rule: Host(`monasso-86-119-30-14.nip.io`)
-      service: api@internal
-      middlewares: api
+    wordpress:
+      entryPoints:
+        - https
+      rule: Host(`wordpress.monasso-86-119-30-14.nip.io`)
+      service: wordpress
+      tls: {}
 
-  middlewares:
     api:
-      basicAuth:
-        users: "test:8050e815c81feca96f920629787b3165"
+      entryPoints:
+        - https
+      rule: Host(`dashboard.monasso-86-119-30-14.nip.io`) && PathPrefix(`/api`)
+      service: api@internal
+      #middlewares: dashboardSecure
+      tls: {}
+
+    dashboard: 
+      entryPoints:
+        - https
+      rule: Host(`dashboard.monasso-86-119-30-14.nip.io`)
+      service: dashboard@internal
+      #middlewares: dashboardSecure
+      tls: {}
+
+    # middlewares:
+    #   dashboardSecure:
+    #     basicAuth:
+    #       userfile: "/etc/traefik/passwordFile"
