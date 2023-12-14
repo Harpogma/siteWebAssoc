@@ -2,6 +2,9 @@
   - name: Run requirements.yml
     import_playbook: requirements.yml
 
+  - name: Run to test password hashing
+    import_playbook: password.yml
+
   - name: Run Secure_connection
     import_playbook: config.yml
   

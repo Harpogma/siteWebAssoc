@@ -29,7 +29,7 @@
         state: started
         restart: true
         ports:
-          - "80:8080"
+          - "80:80"
           - "443:443"
         volumes:
           - /srv/siteweb_asso/traefik/:/etc/traefik/
