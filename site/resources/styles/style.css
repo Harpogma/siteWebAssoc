@@ -1,0 +1,21 @@
+.btn-primary {
+    border-radius: 0;
+    border: solid 1px blue;
+    background-color: transparent;
+    color: blue;
+}
+
+.btn-secondary {
+    border-radius: 0;
+    border: solid 1px orange;
+    background-color: transparent;
+    color: white;
+}
+
+.offer {
+    background-color: rgb(37, 37, 37);
+}
+
+.hero {
+    background-image: url("/site/resources/images/home.png");
+}
